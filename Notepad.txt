@@ -54,12 +54,6 @@ class project implements ActionListener
 			b.add(b1[i]);
 		}	
 			
-			b1[1].setMnemonic(KeyEvent.VK_X);
-			b1[2].setMnemonic(KeyEvent.VK_C);
-			b1[3].setMnemonic(KeyEvent.VK_V);
-			b1[5].setMnemonic(KeyEvent.VK_F);
-			b1[6].setMnemonic(KeyEvent.VK_H);
-			*/
 			
 			KeyStroke ks1=KeyStroke.getKeyStroke(KeyEvent.VK_Z,KeyEvent.CTRL_MASK);
 			b1[0].setAccelerator(ks1);
