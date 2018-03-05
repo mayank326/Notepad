@@ -1,14 +1,10 @@
-import java.awt.*;                    //ar1=main text area ar2=text area of help dialog box(db1)
-import java.awt.event.*;				//ar3=text area of font dialog box(db2)
-import javax.swing.*;					//ar4 & ar5=text area of find	(db3)				
-import java.awt.color.*;     	//JTabbedPane
+import java.awt.*;                   
+import java.awt.event.*;			
+import javax.swing.*;									
+import java.awt.color.*;     	
 import java.io.*;
-import com.sun.speech.freetts.*;            //edit me mnemonic error and font change kerna per new 
-//KeyStroke ks=KeyStroke.getKeyStroke(int key,int modifier);
-//KeyEvent.VK_C,KeyEvent.CTRL_MASK
-//m1.setAccelarator(ks);
-//ta.replaceSelection("tttt") find me jo bhi eneter karega pass it as a string,string
-class project implements ActionListener      //frame opens and added text do not appear
+import com.sun.speech.freetts.*;             
+class project implements ActionListener      
 {	
 	JFrame fr;
 	JMenu a,b,c,d,e;
@@ -57,7 +53,7 @@ class project implements ActionListener      //frame opens and added text do not
 			b1[i]=new JMenuItem(s2[i]);
 			b.add(b1[i]);
 		}	
-			/*b1[0].setMnemonic(KeyEvent.VK_Z);
+			
 			b1[1].setMnemonic(KeyEvent.VK_X);
 			b1[2].setMnemonic(KeyEvent.VK_C);
 			b1[3].setMnemonic(KeyEvent.VK_V);
@@ -396,7 +392,7 @@ class replace extends project implements ActionListener
 						String s11=ar1.getText();
 						String replacestring=s11.replace(s9,s10); 
 						ar1.setText(replacestring);
-						db3.dispose();								//s9 is text to replace and s10 is the text to 
-				}												//replace with
+						db3.dispose();								
+				}												
 		}
 }	
