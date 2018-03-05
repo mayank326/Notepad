@@ -1,0 +1,402 @@
+import java.awt.*;                    //ar1=main text area ar2=text area of help dialog box(db1)
+import java.awt.event.*;				//ar3=text area of font dialog box(db2)
+import javax.swing.*;					//ar4 & ar5=text area of find	(db3)				
+import java.awt.color.*;     	//JTabbedPane
+import java.io.*;
+import com.sun.speech.freetts.*;            //edit me mnemonic error and font change kerna per new 
+//KeyStroke ks=KeyStroke.getKeyStroke(int key,int modifier);
+//KeyEvent.VK_C,KeyEvent.CTRL_MASK
+//m1.setAccelarator(ks);
+//ta.replaceSelection("tttt") find me jo bhi eneter karega pass it as a string,string
+class project implements ActionListener      //frame opens and added text do not appear
+{	
+	JFrame fr;
+	JMenu a,b,c,d,e;
+	JMenuItem a1[]=new JMenuItem[7];
+	JMenuItem b1[]=new JMenuItem[7];
+	JMenuItem c1,e1,d1;
+	JMenuBar bar;
+	Font f1;
+	static JTextArea ar1,ar2;
+	JDialog db1;
+	String s1[]={"   New           Alt+N","   Open          Alt+O","   Save          Alt+S","   Save as..          ","cmd","   Exit               ","Speech" };
+	String s2[]={"   Undo             ","   Cut                ","   Copy             ","   Paste           ","   Del                       ","   Find..             ","   Replace       "};                
+	project()
+	{
+
+		fr=new JFrame("MYPAD");
+		fr.setSize(1200,700);
+		fr.setLayout(null);
+		
+		ar1=new JTextArea("My name is Mayank");
+		ar1.setBounds(0,0,fr.getWidth(),fr.getHeight());
+		fr.add(ar1);
+		
+		bar=new JMenuBar();
+		fr.setJMenuBar(bar);
+		
+		a=new JMenu("File");
+		bar.add(a);
+		
+		
+		for(int i=0;i<a1.length;i++)
+		{
+			a1[i]=new JMenuItem(s1[i]);
+			a.add(a1[i]);
+		}
+			a1[0].setMnemonic(KeyEvent.VK_N);
+			a1[1].setMnemonic(KeyEvent.VK_O);
+			a1[2].setMnemonic(KeyEvent.VK_S);
+			
+		b=new JMenu("Edit");
+		bar.add(b);
+		b.setMnemonic(KeyEvent.VK_E);
+		
+		for(int i=0;i<b1.length;i++)
+		{
+			b1[i]=new JMenuItem(s2[i]);
+			b.add(b1[i]);
+		}	
+			/*b1[0].setMnemonic(KeyEvent.VK_Z);
+			b1[1].setMnemonic(KeyEvent.VK_X);
+			b1[2].setMnemonic(KeyEvent.VK_C);
+			b1[3].setMnemonic(KeyEvent.VK_V);
+			b1[5].setMnemonic(KeyEvent.VK_F);
+			b1[6].setMnemonic(KeyEvent.VK_H);
+			*/
+			
+			KeyStroke ks1=KeyStroke.getKeyStroke(KeyEvent.VK_Z,KeyEvent.CTRL_MASK);
+			b1[0].setAccelerator(ks1);
+			KeyStroke ks2=KeyStroke.getKeyStroke(KeyEvent.VK_X,KeyEvent.CTRL_MASK);
+			b1[1].setAccelerator(ks2);
+			KeyStroke ks3=KeyStroke.getKeyStroke(KeyEvent.VK_C,KeyEvent.CTRL_MASK);
+			b1[2].setAccelerator(ks3);
+			KeyStroke ks4=KeyStroke.getKeyStroke(KeyEvent.VK_V,KeyEvent.CTRL_MASK);
+			b1[3].setAccelerator(ks4);
+			KeyStroke ks5=KeyStroke.getKeyStroke(KeyEvent.VK_F,KeyEvent.CTRL_MASK);
+			b1[5].setAccelerator(ks5);
+			KeyStroke ks6=KeyStroke.getKeyStroke(KeyEvent.VK_H,KeyEvent.CTRL_MASK);
+			b1[6].setAccelerator(ks6);
+
+
+
+
+			c=new JMenu("Format");
+			bar.add(c);
+		
+		
+		c1=new JMenuItem("   Font                  ");
+		c.add(c1);
+		
+		KeyStroke ks7=KeyStroke.getKeyStroke(KeyEvent.VK_D,KeyEvent.CTRL_MASK);
+		c1.setAccelerator(ks7);
+		
+		d=new JMenu("View");
+		bar.add(d);
+		d.setMnemonic(KeyEvent.VK_V);
+		
+		d1=new JMenuItem("   Status Bar               ");
+		d.add(d1);
+		
+		e=new JMenu("Help");
+		bar.add(e);
+		
+		e1=new JMenuItem("   About   MYPAD                ");
+		e.add(e1);
+		
+		
+		
+		
+		e1.addActionListener(this);
+		c1.addActionListener(this);
+		b1[6].addActionListener(this);
+		b1[1].addActionListener(this);
+		b1[2].addActionListener(this);
+		b1[3].addActionListener(this);
+		a1[0].addActionListener(this);
+		a1[1].addActionListener(this);	
+		a1[2].addActionListener(this);
+		a1[4].addActionListener(this);
+		a1[6].addActionListener(this);
+		fr.setVisible(true);
+	}
+	
+	
+	public static void main(String s[])
+	{
+		new project();
+	}
+
+	
+	
+	public void actionPerformed(ActionEvent e)
+	{
+		if(e.getSource()==e1)
+		{
+			db1=new JDialog(fr,"About  MYPAD",true);
+			db1.setSize(700,700);
+			db1.setLayout(null);
+			
+			ar2=new JTextArea("\nThis is a MYPAD similar to NotePad Created by\n Mayank Nagpal With all his Efforts.\nI am an Indian and Want to be a\n millionare");
+			ar2.setBounds(0,0,680,680);
+			db1.add(ar2);
+			f1=new Font("Times",Font.BOLD | Font.ITALIC,30);
+			ar2.setFont(f1);
+			db1.setVisible(true);
+			
+		}
+
+			if(e.getSource()==c1)
+			{
+				new font();
+			}
+				
+			if(e.getSource()==b1[6])
+			{
+				new replace();
+			}
+				
+			if(e.getSource()==b1[1])
+			{
+				ar1.cut();
+			}
+
+			if(e.getSource()==b1[2])
+			{
+				ar1.copy();
+			}	
+			
+			if(e.getSource()==b1[3])
+			{
+				ar1.paste();
+			}
+				
+				if(e.getSource()==a1[1])
+				{
+					try
+					{
+						JFileChooser file=new JFileChooser();
+						file.showOpenDialog(fr);
+						File f=file.getSelectedFile();
+						System.out.println(f);
+						FileInputStream fin=new FileInputStream(f);
+						int size=fin.available();
+						byte b[]=new byte[size];
+						fin.read(b);
+						String str=new String(b);
+						ar1.setText(str);
+					}
+					
+					catch(Exception ee)
+					{}
+				}
+				
+				if(e.getSource()==a1[2])
+				{
+					try
+					{
+						JFileChooser file=new JFileChooser();
+						file.showSaveDialog(fr);
+						File f=file.getSelectedFile();
+
+						FileOutputStream fout=new FileOutputStream(f);
+							String str=ar1.getText();
+							byte b[]=str.getBytes();
+						fout.write(b);
+					}
+					
+					catch(Exception eee)
+					{}
+				}
+				
+				if(e.getActionCommand().equals("cmd"))
+				{try{
+				System.out.println("hello");
+					Runtime.getRuntime().exec("firefox.exe");
+				}catch(Exception ee){}}
+				
+				if(e.getActionCommand().equals("Speech"))
+				{
+					String VOICENAME="kevin16";
+					Voice voice;
+					VoiceManager vm=VoiceManager.getInstance();
+					voice=vm.getVoice(VOICENAME);
+					
+					voice.allocate();
+					
+					try{
+						voice.speak(ar1.getSelectedText());
+					}
+					catch(Exception eee)
+					{}
+				}
+				
+	}	
+
+}
+
+
+
+class font extends JDialog implements ActionListener
+{
+	JComboBox cb1,cb2,cb3;
+	JTextArea ar3;
+	JButton b1,b2;
+	JLabel l1,l2,l3,l4;
+
+	Font f2;
+	String s3[]={"Arial","Blackadder ITC","Bradely Hand ITC","Broadway","Century","Chiller","comic sans MS","Forte","Gigi","Gill Sans MT","Harlow Solid","JokerMan","Latin","Roman","Times New Roman","Verdana"};
+	String s4[]={"Bold","Italics","Plain","Bold & Italics"};
+	String s5[]={"10","20","30","40","50","60","70","80","90","100"};
+	font()
+	{
+		//db2=new JDialog(null,"Font Styles",true);
+		 setSize(600,600);
+		 setLayout(null);
+		
+		l1=new JLabel("Font :");
+		l1.setBounds(55,100,100,30);
+		 add(l1);
+		
+		l2=new JLabel("Style :");
+		l2.setBounds(240,100,100,30);
+		 add(l2);
+		
+		l3=new JLabel("Size :");
+		l3.setBounds(410,100,100,30);
+		 add(l3);
+		
+		cb1=new JComboBox(s3);
+		cb1.setBounds(50,135,150,30);
+		 add(cb1);
+		
+		cb2=new JComboBox(s4);
+		cb2.setBounds(230,135,150,30);
+		 add(cb2);
+		
+		cb3=new JComboBox(s5);
+		cb3.setBounds(410,135,150,30);
+		 add(cb3);
+		
+		l4=new JLabel("sample");
+		l4.setBounds(250,240,100,30);
+		 add(l4);
+		
+		ar3=new JTextArea("\n\tSample");
+		ar3.setBounds(250,260,300,100);
+		 add(ar3);
+		
+		b1=new JButton("OK");
+		b1.setBounds(300,450,100,30);
+		 add(b1);
+		
+		b2=new JButton("Cancel");
+		b2.setBounds(470,450,100,30);
+		 add(b2);
+		
+		cb1.addActionListener(this);
+		cb2.addActionListener(this);
+		cb3.addActionListener(this);
+			
+		b1.addActionListener(this);
+		b2.addActionListener(this);
+		 setVisible(true);
+		
+	}		
+		public static void main(String s[])
+		{
+			new font();
+		}	
+				public void actionPerformed(ActionEvent e)
+				{
+					if(e.getSource()==cb1 || e.getSource()==cb2 || e.getSource()==cb3)
+						{
+							String s6=(String)cb1.getSelectedItem();
+							String s7=(String)cb2.getSelectedItem();
+							String s8=(String)cb3.getSelectedItem();
+							int x=Integer.parseInt(s8);
+							int y=0;
+							if(s7.equals("Bold"))
+								y=Font.BOLD;
+							if(s7.equals("Italics"))
+								y=Font.ITALIC;
+							if(s7.equals("Plain"))
+								 y=Font.PLAIN;
+							if(s7.equals("Bold & Italics"))
+								 y=Font.BOLD | Font.ITALIC;
+								
+							f2=new Font(s6,y,x);
+							ar3.setFont(f2);
+						}
+						
+						if(e.getSource()==b1)//ok
+						{
+						String s12=project.ar1.getText();
+						project.ar1.setText(s12);	
+						project.ar1.setFont(f2);
+						this.dispose();
+						}
+						if(e.getSource()==b2)//cancel
+						this.dispose();	
+				}
+
+}	
+
+
+
+class replace extends project implements ActionListener
+{
+	JDialog db3;
+	JButton b3,b4,b5;
+	JTextArea ar4,ar5;
+	JLabel l5,l6;
+	
+	replace()
+	{
+		db3=new JDialog(fr,"Replace",false);
+		db3.setSize(400,550);
+		db3.setLayout(null);
+
+		l5=new JLabel("Find What:");
+		l5.setBounds(50,100,90,30);
+		db3.add(l5);
+		
+		ar4=new JTextArea();
+		ar4.setBounds(150,100,160,30);
+		db3.add(ar4);
+		
+		l6=new JLabel("Replace with:");
+		l6.setBounds(50,180,90,30);
+		db3.add(l6);
+		
+		ar5=new JTextArea();
+		ar5.setBounds(150,180,160,30);
+		db3.add(ar5);
+		
+		b3=new JButton("Replace");
+		b3.setBounds(70,300,100,50);
+		db3.add(b3);
+		
+		b4=new JButton("Replace All");
+		b4.setBounds(220,300,100,50);
+		db3.add(b4);
+		
+		b3.addActionListener(this);
+		
+													
+		db3.setVisible(true);
+		
+	}
+		public void actionPerformed(ActionEvent e)
+		{
+				if(e.getSource()==b3)
+				{
+						String s9=ar4.getText();
+						String s10=ar5.getText();	
+						String s11=ar1.getText();
+						String replacestring=s11.replace(s9,s10); 
+						ar1.setText(replacestring);
+						db3.dispose();								//s9 is text to replace and s10 is the text to 
+				}												//replace with
+		}
+}	
